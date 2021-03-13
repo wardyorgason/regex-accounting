@@ -1,16 +1,28 @@
 <html>
     <head>
-        <script type="text/javascript" src="angularjs.js"></script>
-        <script type="text/javascript" src="script.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="css/custom.css" />
+        <script type="text/javascript" src="angular-js/angularjs.js"></script>
+        <script type="text/javascript" src="angular-js/script.js"></script>
     </head>
-    <body>
-        <div ng-app="accountingRegex">
-            <div ng-controller="regexController">
-                <div ng-repeat="control in controls">
-                    <span>{{control.Name}}</span>
-                    <p>{{control.Regex}}</p>
-                </div>
-            </div>
+    <body ng-app="accountingRegex">
+        <div ng-controller="regexController" class="container">
+            <form>
+                <h1 class="mt-5">Regex Helper</h1>
+
+                <h2>Input</h2>
+                <textarea class="form-control input-text"></textarea>
+    
+                <h2>Build an Expression</h2>
+                <section>
+                    <div ng-repeat="control in controls">
+                        <span>{{control.Name}}</span>
+                        <p>{{control.Regex}}</p>
+                    </div>
+                </section>
+            </form>
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     </body>
 </html>
