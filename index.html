@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <script type="text/javascript" src="angularjs.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+    </head>
+    <body>
+        <div ng-app="accountingRegex">
+            <div ng-controller="regexController">
+                <div ng-repeat="control in controls">
+                    <span>{{control.Name}}</span>
+                    <p>{{control.Regex}}</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
