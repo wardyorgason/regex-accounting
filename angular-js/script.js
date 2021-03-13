@@ -17,21 +17,31 @@ angular.module('accountingRegex.controllers', []).
             {
                 Id: 2,
                 Name: "Normal Word",
-                Description: "Word like 'dude' or 'Receipt'",
-                Regex: "(\\w+)",
+                Description: `Word like 'dude' or 'Receipt' or 'out-of-stock',
+                but also includes words with weird casing like 'McCormick'`,
+                Regex: "([A-Za-z\\-]+)",
                 Options: []
             },
             {
                 Id: 3,
-                Name: "Number w/o Currency",
-                Description: "This is for numbers like '-100.22' or '6,288.99'",
-                Regex: "(\\-?[0-9,]+\\.\\d{2}?)",
+                Name: "Alphanumeric 'Word' with possible underscores",
+                Description: "Word like 'dude_47' or 'asdf1234'",
+                Regex: "(\\w+)",
                 Options: []
             },
             {
                 Id: 4,
+                Name: "Number w/o Currency",
+                Description: `This is for numbers like '$47.52', '50.',
+                '-100.22' or '6,288.99'`,
+                Regex: "([\\$]?[\\-]?[\\d,]+[\\.]?[\\d]{0,2})",
+                Options: []
+            },
+            {
+                Id: 5,
                 Name: "Anything",
-                Description: "This will capture anything (no pattern). It's really dependent on accurately tracking the values after it.",
+                Description: `This will capture anything (no pattern). It's
+                really dependent on accurately tracking the values after it.`,
                 Regex: "(.*?)",
                 Options: []
             }
@@ -55,8 +65,9 @@ angular.module('accountingRegex.controllers', []).
             var delimiter = "\\t";
             var finalString = "";
 
-            // in case we need to use parenthesis within a regex select statement, we may need to increment
-            //   the number by more than one. That's what the ReplaceIndexModifier represents
+            // in case we need to use parenthesis within a regex select
+            // statement, we may need to increment the number by more than one.
+            // That's what the ReplaceIndexModifier represents
             var count = 1;
             for(var control of $scope.currentRegexList){
                 finalString += "\\" + (count)
@@ -95,15 +106,15 @@ angular.module('accountingRegex.controllers', []).
                     console.log(matches);
                     console.log(line);
                     if(matches && matches[0]){
-                        // we split the result of the first match into our results
-                        //   then push in starting at index 1 (index 0 has the concatenated
-                        //   result which we don't want)
+                        // we split the result of the first match into our
+                        // results then push in starting at index 1 (index 0
+                        // has the concatenated result which we don't want)
                         for(var i = 1; i < matches[0].length; i++)
                             splitLine.push(matches[0][i]);
                     }
                     finalResult.push(splitLine);
                 }
-                $scope.parsedLines = finalResult;    
+                $scope.parsedLines = finalResult;
             } else {
                 $scope.parsedLines = [];
             }
