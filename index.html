@@ -6,23 +6,55 @@
         <script type="text/javascript" src="angular-js/script.js"></script>
     </head>
     <body ng-app="accountingRegex">
-        <div ng-controller="regexController" class="container">
-            <form>
-                <h1 class="mt-5">Regex Helper</h1>
+        <div ng-controller="regexController" >
+            <!-- Visualization section-->
+            <div class="top">
+                <div class="container pt-5">
+                    <h1 class="">Regex Helper</h1>
 
-                <h2>Input</h2>
-                <textarea class="form-control input-text"></textarea>
-    
-                <h2>Build an Expression</h2>
-                <section>
-                    <div ng-repeat="control in controls">
-                        <span>{{control.Name}}</span>
-                        <p>{{control.Regex}}</p>
+                    <h2 class="mt-4">Text Input (from statement)</h2>
+                    <textarea class="form-control input-textarea" ng-model="textInput" ng-change="applyRegex()"></textarea>
+                    
+                    <h2 class="mt-4">Generated Regex</h2>
+                    Search: <input type="text" class="form-control input-text" ng-value="generateRegex()">
+                    Replace: <input type="text" class="form-control input-text" ng-value="generateReplaceRegex()">
+                    <button class="btn btn-secondary mt-3" ng-click="clearRegexList()">Reset</button>
+
+                    <h2 class="mt-4">Output Visualization</h2>
+                    <table class="table">
+                        <thead>
+                            <th ng-repeat="control in currentRegexList track by $index">{{ control.Name }}</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="line in parsedLines track by $index">
+                                <td ng-repeat="match in line track by $index">{{match}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                
+            <div class="container">
+                <h2 class="mt-4">Build an Expression</h2>
+                <p>Click on an item to add it as a column.</p>
+                <div>
+                    <div class="card text-white mb-3 clickable" style="width:18rem;" ng-repeat="control in controls" ng-click="handleControlClick($event, control)">
+                        <h5 class="card-header">{{control.Name}}</h5>
+                        <div class="card-body">
+                            <p class="card-text">{{control.Description}}</p>
+                        </div>
+                        
                     </div>
-                </section>
-            </form>
+                </div>
+            </div>
+            <div class="container">
+                Debug Output:
+                <pre>{{parsedLines | json}}</pre>
+            </div>
+            
         </div>
-
+        <!-- Controller END-->
+            
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     </body>
 </html>

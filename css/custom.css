@@ -26,20 +26,22 @@ a:hover {
 
 html,
 body {
-  height: 100%;
+  background:#272727;
+  box-shadow:none;
+}
+
+.top { 
+  display:block;
+  min-height:800px;;
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
   background-color: #333;
 }
 
 body {
-  display: -ms-flexbox;
-  display: -webkit-box;
-  display: flex;
-  -ms-flex-pack: center;
-  -webkit-box-pack: center;
-  justify-content: center;
+
   color: #fff;
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  
 }
 
 .cover-container {
@@ -107,15 +109,47 @@ body {
 
 /* ADDED by Ward */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+.input-textarea {
+  min-height: 200px;
+  max-height:300px;
+  font-family: 'Roboto Mono', monospace;
+  font-size:12px;
+  background-color: rgb(80, 80, 80);
+  color:white;
+}
+.input-textarea:focus {
+  background-color: rgb(80, 80, 80);
+  color:white;
+}
+
+
 .input-text {
-    min-height: 350px;
-    max-height:500px;
-    font-family: 'Roboto Mono', monospace;
-    font-size:12px;
-    background-color: rgb(80, 80, 80);
-    color:white;
+  background-color: rgb(80, 80, 80);
+  color:white;
+  font-family: 'Roboto Mono', monospace;
+  font-size:12px;
 }
 .input-text:focus {
-    background-color: rgb(80, 80, 80);
-    color:white;
+  background-color: rgb(80, 80, 80);
+  color:white;
+}
+
+.card {}
+
+.card.clickable {
+  cursor:pointer;  
+  background: #505050;
+  width:18rem;
+} 
+.card.clickable:hover {
+  background:#5a5a5a;
+}
+.card-clickable:focus {
+  border: 1px solid #007bff;
+}
+
+pre {
+  color:#222;
+  background:lightgrey;
+  text-shadow:none;
 }
