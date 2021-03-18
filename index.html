@@ -6,7 +6,8 @@
         <script type="text/javascript" src="angular-js/angularjs.js"></script>
         <script type="text/javascript" src="angular-js/angular-route.js"></script>
         <script type="text/javascript" src="angular-js/controllers/regexHelper.controller.js"></script>
-        <script type="text/javascript" src="angular-js/controllers/homeController.js"></script>
+        <script type="text/javascript" src="angular-js/controllers/tableSplitter.controller.js"></script>
+        <script type="text/javascript" src="angular-js/controllers/home.controller.js"></script>
         <script type="text/javascript">
             // build the parent app that will contain the controllers
             var accountingApps = angular.module('accountingRegex.controllers', ['ngRoute']);
@@ -19,6 +20,10 @@
                         .when('/', {
                             templateUrl: 'angular-js/views/regexHelperView.html',
                             controller: 'regexHelperController'
+                        })
+                        .when('/table-splitter', {
+                            templateUrl: 'angular-js/views/tableSplitterView.html',
+                            controller: 'tableSplitterController'
                         });
                     $locationProvider.html5Mode(true);
                 });
@@ -26,6 +31,7 @@
             // attach the separate controllers
             accountingApps.controller('regexHelperController', regexHelperController);
             accountingApps.controller('homeController', homeController);
+            accountingApps.controller('tableSplitterController', tableSplitterController);
         </script>
     </head>
     <body ng-app="accountingRegex">
