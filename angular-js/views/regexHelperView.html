@@ -27,7 +27,7 @@
             <button class="btn btn-secondary mt-3" ng-click="clearRegexList()">Reset</button>
 
             <div class="limited-table">
-                <h2 class="mt-4">Output Visualization</h2>
+                <h2 class="mt-4">Output Table Visualization</h2>
                 <table class="table limited-table">
                     <thead>
                         <th ng-repeat="control in currentRegexList track by $index">{{ control.Name }}</th>
@@ -39,16 +39,20 @@
                     </tbody>
                 </table>
             </div>
-            
 
+            <h2 class="mt-4">Output Tabs</h2>
+            <textarea class="form-control input-textarea" ng-model="tabLinesOutput" ></textarea>
+            <button class="btn btn-secondary">Copy</button>
 
             <h2 class="mt-4">Missed Rows</h2>
-            <p>TODO: list out rows that had no matched elements here</p>
-
+            <textarea class="form-control input-textarea" ng-model="missedRowsOutput" ></textarea>         
+            
+            <br>
             <button class="btn btn-secondary" ng-click="toggleDebugOutput()">{{debugButtonMessage}}</button>
             <div class="mt-4" ng-show="showDebug">
                 Debug Output:
-                <pre>{{parsedLines | json}}</pre>
+                <!--<pre>{{parsedLines | json}}</pre>-->
+                <pre>{{unmatchedLines | json}}</pre>
             </div>
             
         </div>
