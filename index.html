@@ -2,58 +2,65 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="css/custom.css" />
+        <base href="/" />
         <script type="text/javascript" src="angular-js/angularjs.js"></script>
-        <script type="text/javascript" src="angular-js/script.js"></script>
+        <script type="text/javascript" src="angular-js/angular-route.js"></script>
+        <script type="text/javascript" src="angular-js/controllers/regexHelper.controller.js"></script>
+        <script type="text/javascript" src="angular-js/controllers/tableSplitter.controller.js"></script>
+        <script type="text/javascript" src="angular-js/controllers/home.controller.js"></script>
+        <script type="text/javascript">
+            // build the parent app that will contain the controllers
+            var accountingApps = angular.module('accountingRegex.controllers', ['ngRoute']);
+            angular.module('accountingRegex', ['accountingRegex.controllers']);
+
+            // set up url-based routes
+            accountingApps.config(
+                function($routeProvider, $locationProvider) {
+                    $routeProvider
+                        .when('/', {
+                            templateUrl: 'angular-js/views/regexHelperView.html',
+                            controller: 'regexHelperController'
+                        })
+                        .when('/table-splitter', {
+                            templateUrl: 'angular-js/views/tableSplitterView.html',
+                            controller: 'tableSplitterController'
+                        });
+                    $locationProvider.html5Mode(true);
+                });
+
+            // attach the separate controllers
+            accountingApps.controller('regexHelperController', regexHelperController);
+            accountingApps.controller('homeController', homeController);
+            accountingApps.controller('tableSplitterController', tableSplitterController);
+        </script>
     </head>
     <body ng-app="accountingRegex">
-        <div ng-controller="regexController" >
-            <!-- Visualization section-->
-            <div class="top">
-                <div class="container pt-5">
-                    <h1 class="">Regex Helper</h1>
+        <div ng-controller="homeController">
+            <nav class="navbar navbar-expand-lg navbar-default navbar-dark bg-dark fixed-top">
+                <!-- Navbar content -->
+            <a class="navbar-brand" href="#">Accounting Apps</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Regex Helper</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/table-splitter">Table Splitter</a>
+                        </li>
+                    </ul>
+                </div> 
+            </nav>
 
-                    <h2 class="mt-4">Text Input (from statement)</h2>
-                    <textarea class="form-control input-textarea" ng-model="textInput" ng-change="applyRegex()"></textarea>
-                    
-                    <h2 class="mt-4">Generated Regex</h2>
-                    Search: <input type="text" class="form-control input-text" ng-value="generateRegex()">
-                    Replace: <input type="text" class="form-control input-text" ng-value="generateReplaceRegex()">
-                    <button class="btn btn-secondary mt-3" ng-click="clearRegexList()">Reset</button>
-
-                    <h2 class="mt-4">Output Visualization</h2>
-                    <table class="table">
-                        <thead>
-                            <th ng-repeat="control in currentRegexList track by $index">{{ control.Name }}</th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="line in parsedLines track by $index">
-                                <td ng-repeat="match in line track by $index">{{match}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-                
-            <div class="container">
-                <h2 class="mt-4">Build an Expression</h2>
-                <p>Click on an item to add it as a column.</p>
-                <div>
-                    <div class="card text-white mb-3 clickable" style="width:18rem;" ng-repeat="control in controls" ng-click="handleControlClick($event, control)">
-                        <h5 class="card-header">{{control.Name}}</h5>
-                        <div class="card-body">
-                            <p class="card-text">{{control.Description}}</p>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                Debug Output:
-                <pre>{{parsedLines | json}}</pre>
+            <!-- load in the view -->
+            <div class="main-body">
+                <ng-view></ng-view>
             </div>
             
         </div>
-        <!-- Controller END-->
+        
             
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     </body>
