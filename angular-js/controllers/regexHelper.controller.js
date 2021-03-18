@@ -4,13 +4,15 @@ function regexHelperController($scope){
         TrimLines: true
     }
     $scope.parsedLines = [];
+    $scope.showDebug = false;
+    $scope.debugButtonMessage = "Show Debug Output";
 
     $scope.controls = [
         {
             Id: 1,
             Name: "Date",
-            Description: "Date like 01/01/2021 or 5/6/28",
-            Regex: "(\\d{1,2}\\/\\d{1,2}\\/(?:\\d{4}|\\d{2}))",
+            Description: "Date like 01/01/2021 or 5/6/28. Allows a period at the end because of quickbooks",
+            Regex: "(\\d{1,2}\\/\\d{1,2}\\/(?:\\d{4}|\\d{2})\.?)",
             Options: []
         },
         {
@@ -122,6 +124,18 @@ function regexHelperController($scope){
     $scope.clearRegexList = function() {
         $scope.currentRegexList = [];
         $scope.parsedLines = [];
+    }
+
+    $scope.toggleDebugOutput = function(){
+        if(!$scope.showDebug){
+            $scope.showDebug = true;
+            $scope.debugButtonMessage = "Hide Debug Output";
+        } else {
+            $scope.showDebug = false;
+            $scope.debugButtonMessage = "Show Debug Output";
+        }
+        console.log("hello");
+        
     }
 
     $scope.handleControlClick = function(event, control){

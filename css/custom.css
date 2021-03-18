@@ -111,7 +111,7 @@ body {
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 .input-textarea {
   min-height: 200px;
-  max-height:300px;
+  max-height:200px;
   font-family: 'Roboto Mono', monospace;
   font-size:12px;
   background-color: rgb(80, 80, 80);
@@ -152,4 +152,29 @@ pre {
   color:#222;
   background:lightgrey;
   text-shadow:none;
+}
+
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  padding-left:15px;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  height:100%;
+  overflow:scroll;
+  padding-bottom:20px;
+}
+
+.main-body {
+  padding-top:48px;
+}
+
+.limited-table {
+  max-height: 400px;
+  overflow:scroll;
 }
