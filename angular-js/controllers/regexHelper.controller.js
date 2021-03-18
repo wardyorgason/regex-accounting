@@ -4,6 +4,11 @@ function regexHelperController($scope){
         TrimLines: true
     }
     $scope.parsedLines = [];
+    $scope.unmatchedLines = [];
+    
+    $scope.tabLinesOutput = "";
+    $scope.missedRowsOutput = "";
+
     $scope.showDebug = false;
     $scope.debugButtonMessage = "Show Debug Output";
 
@@ -112,13 +117,56 @@ function regexHelperController($scope){
                     // has the concatenated result which we don't want)
                     for(var i = 1; i < matches[0].length; i++)
                         splitLine.push(matches[0][i]);
+                } else {
+                    $scope.unmatchedLines.push(line);
                 }
-                finalResult.push(splitLine);
+                if(splitLine.length > 0)
+                    finalResult.push(splitLine);
             }
             $scope.parsedLines = finalResult;
         } else {
             $scope.parsedLines = [];
+            $scope.unmatchedLines = [];
         }
+
+        // generate printable version of unmatched lines
+        $scope.generateMissedRowsOutput();
+        
+        // generate a copyable tabbed output
+        $scope.generateTabbedOutput();
+    }
+
+    $scope.generateTabbedOutput = function() {
+        // generate tabbed output for parsedLines
+        var delimiter = '\t';
+        var newLine = '\n';
+
+        // reset the output
+        $scope.tabLinesOutput = "";
+
+        // generate the lines
+        if($scope.parsedLines.length > 0){
+            for(var line of $scope.parsedLines) {
+                var lineOutput = "";
+                for(var match of line){
+                    lineOutput += match + delimiter;
+                }
+                lineOutput = lineOutput.substr(0, lineOutput.length - delimiter.length) + newLine;
+                $scope.tabLinesOutput += lineOutput;
+            }
+        } 
+    }
+
+    $scope.generateMissedRowsOutput = function() {
+        var newLine ='\n';
+        
+        $scope.missedRowsOutput = "";
+
+        if($scope.unmatchedLines.length > 0){
+            for(var line of $scope.unmatchedLines){
+                $scope.missedRowsOutput += line + newLine;
+            }
+        } 
     }
 
     $scope.clearRegexList = function() {
