@@ -24,7 +24,7 @@
             Replace: <input type="text" class="form-control input-text" ng-value="generateReplaceRegex()">
             <br />
             <p>TODO: build out interactive view to allow deleting / inserting into the middle. Possibly just deleting the last option like a stack (if the last option is too hard).</p>
-            <button class="btn btn-secondary mt-3" ng-click="clearRegexList()">Reset</button>
+            <button class="btn btn-secondary mr-3 mt-3" ng-click="handleRemoveLastItemClick()">Remove Last Item</button><button class="btn btn-secondary mt-3" ng-click="clearRegexList()">Reset</button>
 
             <div class="limited-table">
                 <h2 class="mt-4">Output Table Visualization</h2>
