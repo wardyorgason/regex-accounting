@@ -52,9 +52,9 @@ function regexHelperController($scope){
             Id: 5,
             Name: "Invoice Number",
             Description: `This is for integers (no decimal) like 10082',
-            'or varying formats of invoice numbers like '#19293.'',
+            'or varying formats of invoice numbers like '#19293.' or '#19233:',
             'In the case of the previous, the '#' and '.' will not be captured`,
-            Regex: "\\#?([0-9]+)\\.?",
+            Regex: "\\#?([0-9\\-]+)(?:\\.?|\\:?)",
             Options: {}
         },
         {
@@ -143,6 +143,7 @@ function regexHelperController($scope){
         var lines = $scope.splitIntoLines();
         var regexText = $scope.generateRegex();
         var finalResult = [];
+        $scope.unmatchedLines = [];
 
         if(lines && regexText){
             var regex = new RegExp(regexText, 'g');

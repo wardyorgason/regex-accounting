@@ -178,3 +178,28 @@ pre {
   max-height: 400px;
   overflow:scroll;
 }
+
+
+/* TABLE SPLITTER Styles */
+.input-side-textarea {
+  width:96%;
+  height:80%;
+  font-family: 'Roboto Mono', monospace;
+  font-size:12px;
+  background-color: rgb(80, 80, 80);
+  color:white;
+}
+.input-side-textarea:focus {
+  background-color: rgb(80, 80, 80);
+  color:white;
+}
+.dark-input {
+  font-family: 'Roboto Mono', monospace;
+  font-size:12px;
+  background-color: rgb(80, 80, 80);
+  color:white;
+}
+.dark-input:focus {
+  background-color: rgb(80, 80, 80);
+  color:white;
+}
