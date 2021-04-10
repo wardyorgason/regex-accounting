@@ -1,1 +1,57 @@
-hi there
+<div class="top container-fluid">
+    <div class="row">
+        <div class="col-md-4 d-none d-md-block sidebar">
+            <h3 class="mt-4">Text Input (from statement)</h3>
+            <textarea class="form-control input-side-textarea mr-2" ng-model="textInput" ng-change="handleTextInputChange()" style="width:96%"></textarea>
+        </div>
+        <div class="col-md-8 ml-sm-auto col-lg-8 px-4 mt-4 pb-4">
+            <h1 class="">Table Splitter</h1>
+            <p>This will help split up data copied from PDFs when the data comes in a single column.</p>
+
+            <h2 class="mt-4">Configuration</h2>
+            <div class="input-group mb-2 mr-sm-2" style="width:110px;">
+                <div class="input-group-prepend">
+                    <button class="btn btn-secondary" ng-click="handleMinusClick()" type="button">-</button>
+                </div>
+                <input type="text" class="form-control dark-input" id="inlineFormInputGroupUsername2" ng-model="columnCount" placeholder="Username">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" ng-click="handlePlusClick()" type="button">+</button>
+                  </div>
+            </div>
+            <input type="checkbox" ng-model="includesHeader" ng-change="handleCheckboxClick()" name="includesHeader"> Includes header
+            <br />
+            <input type="checkbox" ng-model="rotateTable" ng-change="handleCheckboxClick()" name="rotateTable"> Rotate Table
+
+            
+            <div class="limited-table">
+                <h2 class="mt-4">Output Table Visualization</h2>
+                <table class="table limited-table">
+                    <thead ng-if="includesHeader">
+                        <th ng-repeat="col in tableHeaders track by $index">{{ col }}</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="line in tableBody track by $index">
+                            <td ng-repeat="val in line track by $index">{{val}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="mt-4">Output Tabs</h2>
+            <textarea class="form-control input-textarea" ng-model="outputTabs" ></textarea>
+            <button class="btn btn-secondary">Copy</button>
+
+            <h2 class="mt-4">Missed Rows</h2>
+            <textarea class="form-control input-textarea" ng-model="missedRowsOutput" ></textarea>         
+            
+            <br>
+            <button class="btn btn-secondary" ng-click="toggleDebugOutput()">{{debugButtonMessage}}</button>
+            <div class="mt-4" >
+                Debug Output:
+                <!--<pre>{{parsedLines | json}}</pre>-->
+                <pre>{{lines.length | json}}</pre>
+            </div>
+            
+        </div>
+    </div>
+</div>
